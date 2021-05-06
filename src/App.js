@@ -18,7 +18,7 @@ import axios from 'axios';
 import EmployeeInfo from './EmployeeInfo';
 import FilmRequest from './FilmRequest';
 import MovieContainer from './MovieContainer';
-import Search from './Search';
+import SearchBar from './Search';
 
 
 
@@ -26,16 +26,16 @@ import Search from './Search';
 function App() {
 
   const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(""); //lifting state example as its not in the searchjsx
   const [data, setData] = useState("");
 
-  // const findMovie = (event) => {
-  //   axios.get("http://www.omdbapi.com/?apikey=88da2869&s=" + search)
-  //     .then(response => {
-  //       console.log(response)
-  //       setMovies(response.data.Search);
-  //     })
-  // }
+  const findMovie = (event) => {
+    axios.get("http://www.omdbapi.com/?apikey=88da2869&s=" + search)
+      .then(response => {
+        console.log(response)
+        setMovies(response.data.Search);
+      })
+  }
 
 
   
@@ -50,7 +50,7 @@ function App() {
 
         <button onClick={findMovie}>Search <i class="fa fa-search-plus"></i></button><br></br> */}
 
-        <Search />
+        <SearchBar search={search} setSearch={setSearch} findMovie={findMovie}/>
         <MovieContainer movies={movies} />
       </div>
     
